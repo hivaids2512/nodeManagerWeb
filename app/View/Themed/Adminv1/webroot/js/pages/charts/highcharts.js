@@ -562,12 +562,12 @@ var demoHighCharts = function () {
 
                 }
 
-                var line2 = $('#high-line2');
+                var line2 = $('#high-line4');
                  
                 if (line2.length) {
 
                     // High Line 2
-                    $('#high-line2').highcharts({
+                    $('#high-line4').highcharts({
                         credits: false,
                         colors: highColors,
                         chart: {

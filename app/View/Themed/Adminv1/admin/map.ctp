@@ -277,7 +277,7 @@
                         <div class="tab-content br-n">
                             <div id="sidebar-right-tab1" class="tab-pane active">
 
-                                <h5 class="title-divider text-muted mb20"> Node Statistics <span class="pull-right"> <i class="fa fa-caret-down ml5"></i> </span> </h5>
+                                <h5 class="title-divider text-muted mb20"> Node Data<span class="pull-right"> <i class="fa fa-caret-down ml5"></i> </span> </h5>
 
 
                                 <h5 class="title-divider text-muted mt30 mb10" >Longtitude</h5>
@@ -295,7 +295,30 @@
                                     </div>
 
                                 </div>
+                                
+                                <h5 class="title-divider text-muted mt30 mb10" >Node Name</h5>
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <h3 class="text-primary mn pl5" id="longtitude">N/A</h3>
+                                    </div>
 
+                                </div>
+                                
+                                <h5 class="title-divider text-muted mt30 mb10" >Node Location</h5>
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <h3 class="text-primary mn pl5" id="longtitude">N/A</h3>
+                                    </div>
+
+                                </div>
+                                
+                                <h5 class="title-divider text-muted mt30 mb10" >Node Control</h5>
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <h3 class="text-primary mn pl5" id="longtitude">N/A</h3>
+                                    </div>
+
+                                </div>
 
 
                             </div>

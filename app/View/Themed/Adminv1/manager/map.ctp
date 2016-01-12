@@ -283,7 +283,30 @@
                                     </div>
 
                                 </div>
+                                
+                                <h5 class="title-divider text-muted mt30 mb10" >Node Name</h5>
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <h3 class="text-primary mn pl5" id="longtitude">N/A</h3>
+                                    </div>
 
+                                </div>
+                                
+                                <h5 class="title-divider text-muted mt30 mb10" >Node Location</h5>
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <h3 class="text-primary mn pl5" id="longtitude">N/A</h3>
+                                    </div>
+
+                                </div>
+                                
+                                <h5 class="title-divider text-muted mt30 mb10" >Node Control</h5>
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <h3 class="text-primary mn pl5" id="longtitude">N/A</h3>
+                                    </div>
+
+                                </div>
 
 
                             </div>
