@@ -145,11 +145,17 @@
                                 <span class="sidebar-title">Data</span>', array('controller' => 'manager', 'action' => 'data'), array('escape' => false));
                             ?>
                         </li>
-                        <li class="sidebar-label pt20">TCP Server</li>
+                        <li class="sidebar-label pt20">Node Configuration</li>
+                        <li>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicon-plus-sign"></span>
+                                <span class="sidebar-title">Add Node</span>', array('controller' => 'manager', 'action' => 'addnode'), array('escape' => false));
+                            ?>
+                        </li>
                         <li>
                             <?=
                             $this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
-                                <span class="sidebar-title">Configuration</span>', array('controller' => 'manager', 'action' => 'tcp'), array('escape' => false));
+                                <span class="sidebar-title">Node Configuration</span>', array('controller' => 'manager', 'action' => 'nodeconfig'), array('escape' => false));
                             ?>
                         </li>
                         
@@ -287,7 +293,7 @@
                                 <h5 class="title-divider text-muted mt30 mb10" >Node Name</h5>
                                 <div class="row">
                                     <div class="col-xs-5">
-                                        <h3 class="text-primary mn pl5" id="longtitude">N/A</h3>
+                                        <h3 class="text-primary mn pl5" id="nodename">N/A</h3>
                                     </div>
 
                                 </div>
@@ -295,7 +301,15 @@
                                 <h5 class="title-divider text-muted mt30 mb10" >Node Location</h5>
                                 <div class="row">
                                     <div class="col-xs-5">
-                                        <h3 class="text-primary mn pl5" id="longtitude">N/A</h3>
+                                        <h3 class="text-primary mn pl5" id="nodelocation">N/A</h3>
+                                    </div>
+
+                                </div>
+                                
+                                <h5 class="title-divider text-muted mt30 mb10" >Other Information</h5>
+                                <div class="row">
+                                    <div class="col-xs-5">
+                                        <h3 class="text-primary mn pl5" id="nodeother">N/A</h3>
                                     </div>
 
                                 </div>
@@ -351,10 +365,22 @@
                 function setData(data) {
                     $('#longtitude').empty;
                     $('#latitude').empty();
+                    $('#nodename').empty;
+                    $('#nodelocation').empty();
+                    $('#other').empty;
+                    
                     var long = data.split(";")[0];
                     var lat = data.split(";")[1];
+                    var name = data.split(";")[2];
+                    var location = data.split(";")[3];
+                    var other = data.split(";")[4];
+                    
                     $('#longtitude').html(long);
                     $('#latitude').html(lat);
+                    $('#nodename').html(name);
+                    $('#nodelocation').html(location);
+                    $('#nodeother').html(other);
+                    
                 }
 
                 $.ajax({
@@ -366,21 +392,21 @@
                         //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
                     },
                     success: function (response) {
-                        var data = jQuery.parseJSON(response).data;
+                        var data = jQuery.parseJSON(response).nodes;
                         for (var i = 0; i < data.length; i++) {
 
                             map.addMarker({
-                                lat: data[i].Data.latitude,
-                                lng: data[i].Data.longtitude,
-                                title: data[i].Data.nodeid,
+                                lat: data[i].Node.latitude,
+                                lng: data[i].Node.longtitude,
+                                title: data[i].Node.nodeid,
                                 infoWindow: {
-                                    content: data[i].Data.nodeid
+                                    content: data[i].Node.nodename
                                 },
                                 click: (function (t) {
                                     return function () {
                                         setData(t);
                                     };
-                                })(data[i].Data.longtitude + ";" + data[i].Data.latitude)
+                                })(data[i].Node.longtitude + ";" + data[i].Node.latitude + ";" + data[i].Node.nodename + ";" + data[i].Node.nodelocation + ";" + data[i].Node.other  )
                                 //icon: "http://maps.google.com/mapfiles/marker_yellow.png"
                             });
                         }

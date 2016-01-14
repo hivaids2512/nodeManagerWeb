@@ -265,10 +265,10 @@
                                 <div id="p1" class="panel heading-border">
 
                                     <div class="panel-body bg-light">
-                                        <?= $this->Form->create('User', array('id' => 'form-ui', 'url' => array('controller' => 'admin', 'action' => 'adduser'))); ?>
+                                        <?= $this->Form->create('Node', array('id' => 'form-ui', 'url' => array('controller' => 'admin', 'action' => 'newnode'))); ?>
 
                                         <div class="section-divider mb40" id="spy1">
-                                            <span>Create User</span>
+                                            <span>Create Node</span>
                                         </div>
                                         <!-- .section-divider -->
                                         <?php if($this->Session->read('create')){ ?>
@@ -287,7 +287,7 @@
                                             <div class="col-md-8">
                                                 <div class="section">
                                                     <label class="field">
-                                                        <?= $this->Form->input('username', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Username')); ?>
+                                                        <?= $this->Form->input('nodeid', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'NodeId')); ?>
                                                         
                                                     </label>
                                                 </div>
@@ -298,7 +298,7 @@
                                             <div class="col-md-8">
                                                 <div class="section">
                                                     <label class="field">
-                                                        <?= $this->Form->input('password', array('label' => false, 'type' => 'password', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Password')); ?>
+                                                        <?= $this->Form->input('nodename', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Node name')); ?>
                                                     </label>
                                                 </div>
                                             </div>
@@ -308,7 +308,17 @@
                                             <div class="col-md-8">
                                                 <div class="section">
                                                     <label class="field">
-                                                        <?= $this->Form->input('email', array('label' => false, 'type' => 'email', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Email')); ?>
+                                                        <?= $this->Form->input('nodelocation', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Node Location')); ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="section">
+                                                    <label class="field">
+                                                        <?= $this->Form->input('other', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Other Information')); ?>
                                                     </label>
                                                 </div>
                                             </div>
@@ -318,58 +328,20 @@
                                             <div class="col-md-4">
                                                 <div class="section">
                                                     <label class="field">
-                                                        <?= $this->Form->input('firstname', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Firstname')); ?>
+                                                        <?= $this->Form->input('longtitude', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Longtitude')); ?>
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="section">
                                                     <label class="field">
-                                                        <?= $this->Form->input('lastname', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Lastname')); ?>
+                                                        <?= $this->Form->input('latitude', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Latitude')); ?>
                                                     </label>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="section">
-                                                    <label class="field">
-                                                        <?= $this->Form->input('address', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Address')); ?>
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="section">
-                                                    <label class="field">
-                                                        <?= $this->Form->input('phone', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Phone')); ?>
-                                                        </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="section">
-                                                    <label class="field select">
-                                                        <?=
-                                                        $this->Form->input('roleid', array(
-                                                            'label' => false,
-                                                            'type' => 'select',
-                                                            'id' => "country",
-                                                            'options' => array('3' => 'User', '2' => 'Manager', '1' => 'Admin'))
-                                                        );
-                                                        ?>
-                                                        <i class="arrow"></i>
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <button type="submit" form="form-ui" class="button btn-primary mr10 pull-right">Create User</button>
+                                        <button type="submit" form="form-ui" class="button btn-primary mr10 pull-right">Create Node</button>
                                         <?= $this->Form->end(); ?>
 
 

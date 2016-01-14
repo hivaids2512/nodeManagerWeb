@@ -147,12 +147,18 @@
                                 array('controller'=>'admin','action'=>'data'),
                                 array('escape'=>false));?>
                         </li>
-                        <li class="sidebar-label pt20">TCP Server</li>
+                        <li class="sidebar-label pt20">Node Configuration</li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
-                                <span class="sidebar-title">Configuration</span>',
-                                array('controller'=>'admin','action'=>'tcp'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicon-plus-sign"></span>
+                                <span class="sidebar-title">Add Node</span>', array('controller' => 'admin', 'action' => 'addnode'), array('escape' => false));
+                            ?>
+                        </li>
+                        <li>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
+                                <span class="sidebar-title">Node Configuration</span>', array('controller' => 'admin', 'action' => 'nodeconfig'), array('escape' => false));
+                            ?>
                         </li>
                         <li class="sidebar-label pt20">Site Setting</li>
                         <li>

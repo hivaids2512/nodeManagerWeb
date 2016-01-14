@@ -135,47 +135,35 @@
                         <li>
                             <?=
                             $this->Html->link('<span class="glyphicons glyphicons-globe"></span>
-                                <span class="sidebar-title">Map</span>', array('controller' => 'admin', 'action' => 'map'), array('escape' => false));
+                                <span class="sidebar-title">Map</span>', array('controller' => 'manager', 'action' => 'map'), array('escape' => false));
                             ?>
                         </li>
                         <li>
                             <?=
                             $this->Html->link('<span class="glyphicons glyphicons-charts"></span>
-                                <span class="sidebar-title">Statistic</span>', array('controller' => 'admin', 'action' => 'index'), array('escape' => false));
+                                <span class="sidebar-title">Statistic</span>', array('controller' => 'manager', 'action' => 'index'), array('escape' => false));
                             ?>
                         </li>
                         <li>
                             <?=
                             $this->Html->link('<span class="glyphicons glyphicons-table"></span>
-                                <span class="sidebar-title">Data</span>', array('controller' => 'admin', 'action' => 'data'), array('escape' => false));
+                                <span class="sidebar-title">Data</span>', array('controller' => 'manager', 'action' => 'data'), array('escape' => false));
                             ?>
                         </li>
                         <li class="sidebar-label pt20">Node Configuration</li>
                         <li>
                             <?=
                             $this->Html->link('<span class="glyphicons glyphicon-plus-sign"></span>
-                                <span class="sidebar-title">Add Node</span>', array('controller' => 'admin', 'action' => 'addnode'), array('escape' => false));
+                                <span class="sidebar-title">Add Node</span>', array('controller' => 'manager', 'action' => 'addnode'), array('escape' => false));
                             ?>
                         </li>
                         <li>
                             <?=
                             $this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
-                                <span class="sidebar-title">Node Configuration</span>', array('controller' => 'admin', 'action' => 'nodeconfig'), array('escape' => false));
+                                <span class="sidebar-title">Node Configuration</span>', array('controller' => 'manager', 'action' => 'nodeconfig'), array('escape' => false));
                             ?>
                         </li>
-                        <li class="sidebar-label pt20">Site Setting</li>
-                        <li>
-                            <?=
-                            $this->Html->link('<span class="glyphicons glyphicons-user_add"></span>
-                                <span class="sidebar-title">User</span>', array('controller' => 'admin', 'action' => 'user'), array('escape' => false));
-                            ?>
-                        </li>
-                        <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
-                                <span class="sidebar-title">Setting</span>',
-                                array('controller'=>'admin','action'=>'setting'),
-                                array('escape'=>false));?>
-                        </li>
+                        
                     </ul>
                     <div class="sidebar-toggle-mini">
                         <a href="#">
@@ -237,14 +225,14 @@
                         <ol class="breadcrumb">
                             <li class="br-t of-h">
                                 <?=
-                                $this->Html->link('<span class="glyphicon glyphicon-home"></span>', array('controller' => 'admin', 'action' => 'index'), array('escape' => false,));
+                                $this->Html->link('<span class="glyphicon glyphicon-home"></span>', array('controller' => 'manager', 'action' => 'index'), array('escape' => false,));
                                 ?>
 
 
                             </li>
                             <li class="br-t of-h">
                                 <?=
-                                $this->Html->link('User', array('controller' => 'admin', 'action' => 'user'), array('escape' => false,));
+                                $this->Html->link('User', array('controller' => 'manager', 'action' => 'user'), array('escape' => false,));
                                 ?>
 
 
@@ -265,10 +253,10 @@
                                 <div id="p1" class="panel heading-border">
 
                                     <div class="panel-body bg-light">
-                                        <?= $this->Form->create('User', array('id' => 'form-ui', 'url' => array('controller' => 'admin', 'action' => 'adduser'))); ?>
+                                        <?= $this->Form->create('Node', array('id' => 'form-ui', 'url' => array('controller' => 'manager', 'action' => 'newnode'))); ?>
 
                                         <div class="section-divider mb40" id="spy1">
-                                            <span>Create User</span>
+                                            <span>Create Node</span>
                                         </div>
                                         <!-- .section-divider -->
                                         <?php if($this->Session->read('create')){ ?>
@@ -287,7 +275,7 @@
                                             <div class="col-md-8">
                                                 <div class="section">
                                                     <label class="field">
-                                                        <?= $this->Form->input('username', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Username')); ?>
+                                                        <?= $this->Form->input('nodeid', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'NodeId')); ?>
                                                         
                                                     </label>
                                                 </div>
@@ -298,7 +286,7 @@
                                             <div class="col-md-8">
                                                 <div class="section">
                                                     <label class="field">
-                                                        <?= $this->Form->input('password', array('label' => false, 'type' => 'password', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Password')); ?>
+                                                        <?= $this->Form->input('nodename', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Node name')); ?>
                                                     </label>
                                                 </div>
                                             </div>
@@ -308,7 +296,17 @@
                                             <div class="col-md-8">
                                                 <div class="section">
                                                     <label class="field">
-                                                        <?= $this->Form->input('email', array('label' => false, 'type' => 'email', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Email')); ?>
+                                                        <?= $this->Form->input('nodelocation', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Node Location')); ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="section">
+                                                    <label class="field">
+                                                        <?= $this->Form->input('other', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Other Information')); ?>
                                                     </label>
                                                 </div>
                                             </div>
@@ -318,58 +316,20 @@
                                             <div class="col-md-4">
                                                 <div class="section">
                                                     <label class="field">
-                                                        <?= $this->Form->input('firstname', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Firstname')); ?>
+                                                        <?= $this->Form->input('longtitude', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Longtitude')); ?>
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="section">
                                                     <label class="field">
-                                                        <?= $this->Form->input('lastname', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Lastname')); ?>
+                                                        <?= $this->Form->input('latitude', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Latitude')); ?>
                                                     </label>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="section">
-                                                    <label class="field">
-                                                        <?= $this->Form->input('address', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Address')); ?>
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="section">
-                                                    <label class="field">
-                                                        <?= $this->Form->input('phone', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'placeholder' => 'Phone')); ?>
-                                                        </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-8">
-                                                <div class="section">
-                                                    <label class="field select">
-                                                        <?=
-                                                        $this->Form->input('roleid', array(
-                                                            'label' => false,
-                                                            'type' => 'select',
-                                                            'id' => "country",
-                                                            'options' => array('3' => 'User', '2' => 'Manager', '1' => 'Admin'))
-                                                        );
-                                                        ?>
-                                                        <i class="arrow"></i>
-                                                    </label>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <button type="submit" form="form-ui" class="button btn-primary mr10 pull-right">Create User</button>
+                                        <button type="submit" form="form-ui" class="button btn-primary mr10 pull-right">Create Node</button>
                                         <?= $this->Form->end(); ?>
 
 

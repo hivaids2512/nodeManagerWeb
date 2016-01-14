@@ -95,29 +95,35 @@
                     <ul class="nav sidebar-menu">
                         <li class="sidebar-label pt20">Node Manager</li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-globe"></span>
-                                <span class="sidebar-title">Map</span>',
-                                array('controller'=>'manager','action'=>'map'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-globe"></span>
+                                <span class="sidebar-title">Map</span>', array('controller' => 'manager', 'action' => 'map'), array('escape' => false));
+                            ?>
                         </li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-charts"></span>
-                                <span class="sidebar-title">Statistic</span>',
-                                array('controller'=>'manager','action'=>'index'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-charts"></span>
+                                <span class="sidebar-title">Statistic</span>', array('controller' => 'manager', 'action' => 'index'), array('escape' => false));
+                            ?>
                         </li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-table"></span>
-                                <span class="sidebar-title">Data</span>',
-                                array('controller'=>'manager','action'=>'data'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-table"></span>
+                                <span class="sidebar-title">Data</span>', array('controller' => 'manager', 'action' => 'data'), array('escape' => false));
+                            ?>
                         </li>
-                        <li class="sidebar-label pt20">TCP Server</li>
+                        <li class="sidebar-label pt20">Node Configuration</li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
-                                <span class="sidebar-title">Configuration</span>',
-                                array('controller'=>'manager','action'=>'tcp'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicon-plus-sign"></span>
+                                <span class="sidebar-title">Add Node</span>', array('controller' => 'manager', 'action' => 'addnode'), array('escape' => false));
+                            ?>
+                        </li>
+                        <li>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
+                                <span class="sidebar-title">Node Configuration</span>', array('controller' => 'manager', 'action' => 'nodeconfig'), array('escape' => false));
+                            ?>
                         </li>
 
                     </ul>
@@ -225,13 +231,10 @@
                                             <div class="smart-widget sm-right smr-50">
                                                 <label class="field">
                                                     <form>
-                                                        <select name="sub" id="sub" class="gui-input br-n" placeholder="Search State">
-                                                            <option>as</option>
-                                                            <option>as</option>
-                                                            <option>as</option>
-                                                            <option>as</option>
-                                                            <option>as</option>
-                                                            <option>as</option>
+                                                       <select name="id1" id="id1" class="gui-input br-n" placeholder="Search State">
+                                                            <?php foreach ($Node as $node) { ?>
+                                                                <option value="<?= $node['Node']['nodeid'] ?>"><?= $node['Node']['nodename'] ?></option>
+                                                            <?php } ?>
                                                         </select>
                                                     </form>
                                                 </label>
@@ -288,13 +291,10 @@
                                             <div class="smart-widget sm-right smr-50">
                                                 <label class="field">
                                                     <form>
-                                                        <select name="sub" id="sub" class="gui-input br-n" placeholder="Search State">
-                                                            <option>as</option>
-                                                            <option>as</option>
-                                                            <option>as</option>
-                                                            <option>as</option>
-                                                            <option>as</option>
-                                                            <option>as</option>
+                                                        <select name="id2" id="id2" class="gui-input br-n" placeholder="Search State">
+                                                            <?php foreach ($Node as $node) { ?>
+                                                                <option value="<?= $node['Node']['nodeid'] ?>"><?= $node['Node']['nodename'] ?></option>
+                                                            <?php } ?>
                                                         </select>
                                                     </form>
                                                 </label>
@@ -369,39 +369,77 @@
 
                 Demo.init();
                 
-                function draw(id, data){
-                    $(id).highcharts({
-                            title: {
-                                text: 'Node Report',
-                                x: -20 //center
-                            },
-                            
-                            xAxis: {
-                                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                            },
-                            yAxis: {
-                                title: {
-                                    text: 'Data'
-                                },
-                                plotLines: [{
-                                        value: 0,
-                                        width: 1,
-                                        color: '#808080'
-                                    }]
-                            },
-                            
-                            
-                            series: [{
-                                    name: 'Data1',
-                                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6,7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                                }, {
-                                    name: 'Data2',
-                                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-                                }]
-                        });
+                var root = document.location.href;
+                if(root.lastIndexOf('/') !== (root.length -1)){
+                    root = root + '/';
                 }
+                
+                drawWithId( '#id1', '#high-line3');
+                drawWithId( '#id2', '#high-line4');
+
+                function draw(id, categories, series) {
+                    $(id).highcharts({
+                        title: {
+                            text: 'Node Report',
+                            x: -20 //center
+                        },
+                        xAxis: {
+                            categories: categories
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Data'
+                            },
+                            plotLines: [{
+                                    value: 0,
+                                    width: 1,
+                                    color: '#808080'
+    }]
+                        },
+                        series: series
+                    });
+                }
+                
+                function drawWithId(id, area){
+                    
+                    $.ajax({
+                        type: "GET",
+                        url: root + "../statistic/view/" + $(id).val() + ".json",
+                        //data: $("#update_document").serialize(),
+                        dataType: "text",
+                        beforeSend: function () {
+                            //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
+                        },
+                        success: function (response) {
+                            
+                            var data = jQuery.parseJSON(response).data;
+                            var categories = [];
+                            var series = [];
+                            var dataValue1 = [];
+                            var dataValue2 = [];
+                            for (var i = 0; i < data.length; i++) {
+                                categories.push(data[i].Data.time);
+                                dataValue1.push(parseInt(data[i].Data.data1));
+                                dataValue2.push(parseInt(data[i].Data.data2));
+                            }
+                            var s1 = {name: "Data1", data: dataValue1};
+                            var s2 = {name: 'Data2', data: dataValue2};
+                            series.push(s1);
+                            series.push(s2);
+
+                            draw(area, categories, series);
+                        }
+                    });
+                }
+
+
+                $('#id1').change(function () {
+                     drawWithId( '#id1', '#high-line3');
+                });
+
+                $('#id2').change(function () {
+                        drawWithId( '#id2', '#high-line4');
+                });
 
                 $('.admin-panels').adminpanel({
                     grid: '.admin-grid',
@@ -414,15 +452,14 @@
                     },
                     onFinish: function () {
                         $('.admin-panels').addClass('animated fadeIn').removeClass('fade-onload');
-                        
-                        draw('#high-line3', 1);
-                        draw('#high-line4', 1);
-                    },    
+
+
+                    },
                     onSave: function () {
                         $(window).trigger('resize');
                     }
                 });
-                
+
 
 
             });

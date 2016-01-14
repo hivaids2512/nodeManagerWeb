@@ -130,29 +130,35 @@
                    <ul class="nav sidebar-menu">
                         <li class="sidebar-label pt20">Node Manager</li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-globe"></span>
-                                <span class="sidebar-title">Map</span>',
-                                array('controller'=>'manager','action'=>'map'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-globe"></span>
+                                <span class="sidebar-title">Map</span>', array('controller' => 'manager', 'action' => 'map'), array('escape' => false));
+                            ?>
                         </li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-charts"></span>
-                                <span class="sidebar-title">Statistic</span>',
-                                array('controller'=>'manager','action'=>'index'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-charts"></span>
+                                <span class="sidebar-title">Statistic</span>', array('controller' => 'manager', 'action' => 'index'), array('escape' => false));
+                            ?>
                         </li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-table"></span>
-                                <span class="sidebar-title">Data</span>',
-                                array('controller'=>'manager','action'=>'data'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-table"></span>
+                                <span class="sidebar-title">Data</span>', array('controller' => 'manager', 'action' => 'data'), array('escape' => false));
+                            ?>
                         </li>
-                        <li class="sidebar-label pt20">TCP Server</li>
+                        <li class="sidebar-label pt20">Node Configuration</li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
-                                <span class="sidebar-title">Configuration</span>',
-                                array('controller'=>'manager','action'=>'tcp'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicon-plus-sign"></span>
+                                <span class="sidebar-title">Add Node</span>', array('controller' => 'manager', 'action' => 'addnode'), array('escape' => false));
+                            ?>
+                        </li>
+                        <li>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
+                                <span class="sidebar-title">Node Configuration</span>', array('controller' => 'manager', 'action' => 'nodeconfig'), array('escape' => false));
+                            ?>
                         </li>
                         
                     </ul>

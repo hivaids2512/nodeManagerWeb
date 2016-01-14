@@ -32,7 +32,7 @@ class managerController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->deny('index', 'map', 'statistic', 'data', 'tcp');
+        $this->Auth->deny('index', 'map', 'statistic', 'data', 'addnode', 'nodeconfig', 'editnode', 'updatenode', 'newnode');
         if ($this->Auth->user()) {
             if ($this->Auth->user('roleid') != 2) {
                 throw new ForbiddenException();
@@ -41,9 +41,11 @@ class managerController extends AppController {
     }
 
     public function index() {
+        $this->loadModel('Node');
+        $node = $this->Node->find('all');
         $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
         $this->set('title', "Dashboard");
-        //throw new ForbiddenException();
+        $this->set('Node', $node);
     }
 
     public function map() {
@@ -67,9 +69,65 @@ class managerController extends AppController {
         $this->layout = false;
     }
 
-    public function tcp() {
+    public function addnode() {
         $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
-        $this->set('title', "Statistic");
+        $this->set('title', "Add New Node");
+        $this->layout = false;
+    }
+    
+    public function nodeconfig() {
+        $this->loadModel('Node');
+        $node = $this->Node->find('all');
+        $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
+        $this->set('title', "Data");
+        $this->set('Node', $node );
+        $this->layout = false;
+    }
+    
+    public function editnode($id) {
+        $this->loadModel('Node');
+        $node = $this->Node->find('all', array('conditions' => array('Node.nodeid' => $id)));
+        
+        $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
+        $this->set('title', "Edit Node");
+        if($node != null){
+            $this->set('node', $node);
+        }else{
+            throw new NotFoundException();
+        }
+        
+        $this->layout = false;
+    }
+    
+    public function updatenode() {
+        
+        if($this->request->is('post')){
+            $id = $this->request->data['Node']['nodeid'];
+            $this->loadModel('Node');
+            $this->Node->set($this->request->data);
+            if($this->Node->save()){
+               $this->Session->write('create', 'Ok');
+            }else{
+                $this->Session->write('creates', $this->Node->validationErrors);
+            }
+            
+            $this->redirect(array('controller' => 'manager', 'action' => 'editnode', $id));
+        }
+        $this->layout = false;
+    }
+    
+    public function newnode() {
+        if($this->request->is('post')){
+            $this->loadModel('Node');
+            $this->Node->set($this->request->data);
+            if($this->Node->save()){
+               $this->Session->write('create', 'Ok');
+            }else{
+                $this->Session->write('creates', $this->Node->validationErrors);
+            }
+            
+            $this->redirect(array('controller' => 'manager', 'action' => 'addnode'));
+        }
         $this->layout = false;
     }
 

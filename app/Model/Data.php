@@ -23,4 +23,11 @@ class Data extends AppModel{
     public $data1;
     public $data2;
     
+    public $belongsTo = array(
+        'Node' => array(
+            'className' => 'Node',
+            'foreignKey' => 'nodeid'
+        )
+    );
+    
 }

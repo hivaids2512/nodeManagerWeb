@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Static content controller.
  *
@@ -17,7 +18,6 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 App::uses('AppController', 'Controller');
 
 /**
@@ -29,29 +29,37 @@ App::uses('AppController', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
 class StatisticController extends AppController {
-        
-        public $components = array('RequestHandler');
-    
-        public function index() {
-            $this->set(array(
-            'message' => 'asd',
-            '_serialize' => array('message')
+
+    public $components = array('RequestHandler');
+
+    public function index() {
+        $this->loadModel('Data');
+        $data = $this->Data->find('all', array('conditions' => array('Node.nodeid' => 'node1')));
+        $this->set(array(
+            'data' => $data,
+            '_serialize' => array('data')
         ));
-	}
+    }
+
+    public function add() {
         
-        public function add(){
-            
-        }
+    }
+
+    public function view($id) {
+        $this->loadModel('Data');
+        $data = $this->Data->find('all', array('conditions' => array('Node.nodeid' => $id)));
+        $this->set(array(
+            'data' => $data,
+            '_serialize' => array('data')
+        ));
+    }
+
+    public function edit() {
         
-        public function view(){
-            
-        }
+    }
+
+    public function delete() {
         
-        public function edit() {
-            
-        }
-        
-        public function delete(){
-            
-        }
+    }
+
 }

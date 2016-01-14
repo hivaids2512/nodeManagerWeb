@@ -32,7 +32,7 @@ class adminController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->deny('index', 'map', 'statistic', 'data', 'tcp', 'user', 'setting', 'userdata');
+        $this->Auth->deny('index', 'map', 'statistic', 'data', 'addnode', 'nodeconfig', 'editnode', 'user', 'setting', 'newnode', 'updatenode');
         /*
         $action = $this->request['action'];
         $adminAllowList = array('index', 'map', 'statistic', 'data', 'tcp', 'user', 'setting', 'userdata');
@@ -47,8 +47,11 @@ class adminController extends AppController {
     }
 
     public function index() {
+        $this->loadModel('Node');
+        $node = $this->Node->find('all');
         $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
         $this->set('title', "Dashboard");
+        $this->set('Node', $node);
         //throw new ForbiddenException();
     }
 
@@ -73,12 +76,6 @@ class adminController extends AppController {
         $this->layout = false;
     }
 
-    public function tcp() {
-        $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
-        $this->set('title', "Statistic");
-        $this->layout = false;
-    }
-
     public function user() {
         $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
         $this->set('title', "User");
@@ -91,9 +88,50 @@ class adminController extends AppController {
         $this->layout = false;
     }
 
-    public function userdata() {
+    public function addnode() {
         $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
-        $this->set('title', "Statistic");
+        $this->set('title', "Add New Node");
+        $this->layout = false;
+    }
+    
+    public function nodeconfig() {
+        $this->loadModel('Node');
+        $node = $this->Node->find('all');
+        $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
+        $this->set('title', "Data");
+        $this->set('Node', $node );
+        $this->layout = false;
+    }
+    
+    public function editnode($id) {
+        $this->loadModel('Node');
+        $node = $this->Node->find('all', array('conditions' => array('Node.nodeid' => $id)));
+        
+        $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
+        $this->set('title', "Edit Node");
+        if($node != null){
+            $this->set('node', $node);
+        }else{
+            throw new NotFoundException();
+        }
+        
+        $this->layout = false;
+    }
+    
+    public function updatenode() {
+        
+        if($this->request->is('post')){
+            $id = $this->request->data['Node']['nodeid'];
+            $this->loadModel('Node');
+            $this->Node->set($this->request->data);
+            if($this->Node->save()){
+               $this->Session->write('create', 'Ok');
+            }else{
+                $this->Session->write('creates', $this->Node->validationErrors);
+            }
+            
+            $this->redirect(array('controller' => 'admin', 'action' => 'editnode', $id));
+        }
         $this->layout = false;
     }
     
@@ -112,6 +150,22 @@ class adminController extends AppController {
         $this->layout = false;
     }
     
+    public function newnode() {
+        if($this->request->is('post')){
+            $this->loadModel('Node');
+            $this->Node->set($this->request->data);
+            if($this->Node->save()){
+               $this->Session->write('create', 'Ok');
+            }else{
+                $this->Session->write('creates', $this->Node->validationErrors);
+            }
+            
+            $this->redirect(array('controller' => 'admin', 'action' => 'addnode'));
+        }
+        $this->layout = false;
+    }
+    
+    /*
     public function save() {
             $this->loadModel('User');
             $user = new User();
@@ -126,6 +180,6 @@ class adminController extends AppController {
             $user->phone = '0936295904';
             $user->roleid = 1;
             $this->User->save($user);
-        }
+        }*/
 
 }

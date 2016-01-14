@@ -38,6 +38,7 @@
 	CakePlugin::routes();
         Router::mapResources(['map','data','statistic']);
         Router::parseExtensions();
+       
         
         
 /**

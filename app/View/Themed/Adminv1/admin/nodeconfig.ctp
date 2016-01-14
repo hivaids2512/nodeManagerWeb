@@ -49,7 +49,7 @@
 
         <!-- Start: Main -->
         <div id="main">
-            
+
             <!-- Start: Header -->
             <header class="navbar navbar-fixed-top bg-light">
                 <div class="navbar-branding">
@@ -74,11 +74,11 @@
                         </a>
                         <ul class="dropdown-menu dropdown-persist pn w250 bg-white" role="menu">
                             <li class="br-t of-h">
-                                <?=$this->Html->link('<span class="fa fa-power-off pr5"></span> Logout </a>',
-                                array('controller'=>'login','action'=>'dologout'),
-                                array('escape'=>false, 'class' => 'fw600 p12 animated animated-short fadeInDown'));?>
-                               
-                                    
+                                <?=
+                                $this->Html->link('<span class="fa fa-power-off pr5"></span> Logout </a>', array('controller' => 'login', 'action' => 'dologout'), array('escape' => false, 'class' => 'fw600 p12 animated animated-short fadeInDown'));
+                                ?>
+
+
                             </li>
                         </ul>
                     </li>
@@ -133,22 +133,22 @@
                     <ul class="nav sidebar-menu">
                         <li class="sidebar-label pt20">Node Manager</li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-globe"></span>
-                                <span class="sidebar-title">Map</span>',
-                                array('controller'=>'admin','action'=>'map'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-globe"></span>
+                                <span class="sidebar-title">Map</span>', array('controller' => 'admin', 'action' => 'map'), array('escape' => false));
+                            ?>
                         </li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-charts"></span>
-                                <span class="sidebar-title">Statistic</span>',
-                                array('controller'=>'admin','action'=>'index'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-charts"></span>
+                                <span class="sidebar-title">Statistic</span>', array('controller' => 'admin', 'action' => 'index'), array('escape' => false));
+                            ?>
                         </li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-table"></span>
-                                <span class="sidebar-title">Data</span>',
-                                array('controller'=>'admin','action'=>'data'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-table"></span>
+                                <span class="sidebar-title">Data</span>', array('controller' => 'admin', 'action' => 'data'), array('escape' => false));
+                            ?>
                         </li>
                         <li class="sidebar-label pt20">Node Configuration</li>
                         <li>
@@ -165,16 +165,16 @@
                         </li>
                         <li class="sidebar-label pt20">Site Setting</li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-user_add"></span>
-                                <span class="sidebar-title">User</span>',
-                                array('controller'=>'admin','action'=>'user'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-user_add"></span>
+                                <span class="sidebar-title">User</span>', array('controller' => 'admin', 'action' => 'user'), array('escape' => false));
+                            ?>
                         </li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
-                                <span class="sidebar-title">Setting</span>',
-                                array('controller'=>'admin','action'=>'setting'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
+                                <span class="sidebar-title">Setting</span>', array('controller' => 'admin', 'action' => 'setting'), array('escape' => false));
+                            ?>
                         </li>
                     </ul>
                     <div class="sidebar-toggle-mini">
@@ -236,18 +236,18 @@
                     <div class="topbar-left">
                         <ol class="breadcrumb">
                             <li class="br-t of-h">
-                                <?=$this->Html->link('<span class="glyphicon glyphicon-home"></span>',
-                                array('controller'=>'admin','action'=>'index'),
-                                array('escape'=>false,));?>
-                               
-                                    
+                                <?=
+                                $this->Html->link('<span class="glyphicon glyphicon-home"></span>', array('controller' => 'admin', 'action' => 'index'), array('escape' => false,));
+                                ?>
+
+
                             </li>
                             <li class="br-t of-h">
-                                <?=$this->Html->link('Data',
-                                array('controller'=>'admin','action'=>'data'),
-                                array('escape'=>false,));?>
-                               
-                                    
+                                <?=
+                                $this->Html->link('Data', array('controller' => 'admin', 'action' => 'data'), array('escape' => false,));
+                                ?>
+
+
                             </li>
                         </ol>
                     </div>
@@ -265,7 +265,7 @@
                     <div class="tray tray-center p40 va-t posr">
 
                         <div class="row">
-                            
+
 
                             <div class="col-md-12">
                                 <div class="panel panel-visible" id="spy3">
@@ -277,34 +277,39 @@
                                         <table class="table table-striped table-hover" id="datatable3" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Time</th>
                                                     <th>NodeID</th>
+                                                    <th>Node Name</th>
+                                                    <th>Node Location</th>
                                                     <th>Longtitude</th>
                                                     <th>Latitude</th>
-                                                    <th>Data1</th>
-                                                    <th>Data2</th>
+                                                    <th>Other Information</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Time</th>
                                                     <th>NodeID</th>
+                                                    <th>Node Name</th>
+                                                    <th>Node Location</th>
                                                     <th>Longtitude</th>
                                                     <th>Latitude</th>
-                                                    <th>Data1</th>
-                                                    <th>Data2</th>
+                                                    <th>Other Information</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </tfoot>
                                             <tbody>
-                                                <?php foreach($Data as $data){ ?>
-                                                <tr>
-                                                    <td><?= $data['Data']['time'] ?></td>
-                                                    <td><?= $data['Data']['nodeid'] ?></td>
-                                                    <td><?= $data['Data']['longtitude'] ?></td>
-                                                    <td><?= $data['Data']['latitude'] ?></td>
-                                                    <td><?= $data['Data']['data1'] ?></td>
-                                                    <td><?= $data['Data']['data2'] ?></td>
-                                                </tr>
+                                                <?php foreach ($Node as $node) { ?>
+                                                    <tr>
+                                                        <td><?= $node['Node']['nodeid'] ?></td>
+                                                        <td><?= $node['Node']['nodename'] ?></td>
+                                                        <td><?= $node['Node']['nodelocation'] ?></td>
+                                                        <td><?= $node['Node']['longtitude'] ?></td>
+                                                        <td><?= $node['Node']['latitude'] ?></td>
+                                                        <td><?= $node['Node']['other'] ?></td>
+                                                        <td><?=
+                                                            $this->Html->link('Edit', array('controller' => 'admin', 'action' => 'editnode', $node['Node']['nodeid']), array('escape' => false,));
+                                                            ?></td>
+                                                    </tr>
                                                 <?php } ?>
                                             </tbody>
                                         </table>
@@ -312,9 +317,9 @@
                                 </div>
                             </div>
 
-                            
+
                         </div>
-                        </div>
+                    </div>
 
                     </div>
                     <!-- end: .tray-center -->

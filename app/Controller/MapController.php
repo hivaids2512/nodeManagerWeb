@@ -33,11 +33,11 @@ class MapController extends AppController {
         public $components = array('RequestHandler');
     
         public function index() {
-            $this->loadModel('Data');
-            $data = $this->Data->find('all', array('group' => 'Data.nodeid'));
+            $this->loadModel('Node');
+            $nodes = $this->Node->find('all');
             $this->set(array(
-            'data' => $data,
-            '_serialize' => array('data')
+            'nodes' => $nodes,
+            '_serialize' => array('nodes')
         ));
 	}
         
@@ -45,9 +45,14 @@ class MapController extends AppController {
             
         }
         
-        public function view(){
-            
-        }
+        public function view($id) {
+        $this->loadModel('Data');
+        $data = $this->Data->find('all', array('conditions' => array('Node.nodeid' => 'node1')));
+        $this->set(array(
+            'data' => $data,
+            '_serialize' => array('data')
+        ));
+    }
         
         public function edit() {
             

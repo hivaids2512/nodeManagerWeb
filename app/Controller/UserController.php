@@ -41,8 +41,11 @@ class userController extends AppController {
     }
 
     public function index() {
+        $this->loadModel('Node');
+        $node = $this->Node->find('all');
         $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
         $this->set('title', "Dashboard");
+        $this->set('Node', $node);
         //throw new ForbiddenException();
     }
 
