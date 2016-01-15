@@ -21,6 +21,7 @@
         <?= $this->Html->css('dataTables.editor.css') ?>
         <!-- Theme CSS -->
         <?= $this->Html->css('theme.css') ?>
+        <?= $this->Html->css('datepicker.css') ?>
 
         <!-- Favicon -->
         <?=
@@ -49,7 +50,7 @@
 
         <!-- Start: Main -->
         <div id="main">
-            
+
             <!-- Start: Header -->
             <header class="navbar navbar-fixed-top bg-light">
                 <div class="navbar-branding">
@@ -74,11 +75,11 @@
                         </a>
                         <ul class="dropdown-menu dropdown-persist pn w250 bg-white" role="menu">
                             <li class="br-t of-h">
-                                <?=$this->Html->link('<span class="fa fa-power-off pr5"></span> Logout </a>',
-                                array('controller'=>'login','action'=>'dologout'),
-                                array('escape'=>false, 'class' => 'fw600 p12 animated animated-short fadeInDown'));?>
-                               
-                                    
+                                <?=
+                                $this->Html->link('<span class="fa fa-power-off pr5"></span> Logout </a>', array('controller' => 'login', 'action' => 'dologout'), array('escape' => false, 'class' => 'fw600 p12 animated animated-short fadeInDown'));
+                                ?>
+
+
                             </li>
                         </ul>
                     </li>
@@ -133,22 +134,22 @@
                     <ul class="nav sidebar-menu">
                         <li class="sidebar-label pt20">Node Manager</li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-globe"></span>
-                                <span class="sidebar-title">Map</span>',
-                                array('controller'=>'admin','action'=>'map'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-globe"></span>
+                                <span class="sidebar-title">Map</span>', array('controller' => 'admin', 'action' => 'map'), array('escape' => false));
+                            ?>
                         </li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-charts"></span>
-                                <span class="sidebar-title">Statistic</span>',
-                                array('controller'=>'admin','action'=>'index'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-charts"></span>
+                                <span class="sidebar-title">Statistic</span>', array('controller' => 'admin', 'action' => 'index'), array('escape' => false));
+                            ?>
                         </li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-table"></span>
-                                <span class="sidebar-title">Data</span>',
-                                array('controller'=>'admin','action'=>'data'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-table"></span>
+                                <span class="sidebar-title">Data</span>', array('controller' => 'admin', 'action' => 'data'), array('escape' => false));
+                            ?>
                         </li>
                         <li class="sidebar-label pt20">Node Configuration</li>
                         <li>
@@ -165,16 +166,16 @@
                         </li>
                         <li class="sidebar-label pt20">Site Setting</li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-user_add"></span>
-                                <span class="sidebar-title">User</span>',
-                                array('controller'=>'admin','action'=>'user'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-user_add"></span>
+                                <span class="sidebar-title">User</span>', array('controller' => 'admin', 'action' => 'user'), array('escape' => false));
+                            ?>
                         </li>
                         <li>
-                            <?=$this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
-                                <span class="sidebar-title">Setting</span>',
-                                array('controller'=>'admin','action'=>'setting'),
-                                array('escape'=>false));?>
+                            <?=
+                            $this->Html->link('<span class="glyphicons glyphicons-cogwheels"></span>
+                                <span class="sidebar-title">Setting</span>', array('controller' => 'admin', 'action' => 'setting'), array('escape' => false));
+                            ?>
                         </li>
                     </ul>
                     <div class="sidebar-toggle-mini">
@@ -236,18 +237,18 @@
                     <div class="topbar-left">
                         <ol class="breadcrumb">
                             <li class="br-t of-h">
-                                <?=$this->Html->link('<span class="glyphicon glyphicon-home"></span>',
-                                array('controller'=>'admin','action'=>'index'),
-                                array('escape'=>false,));?>
-                               
-                                    
+                                <?=
+                                $this->Html->link('<span class="glyphicon glyphicon-home"></span>', array('controller' => 'admin', 'action' => 'index'), array('escape' => false,));
+                                ?>
+
+
                             </li>
                             <li class="br-t of-h">
-                                <?=$this->Html->link('Data',
-                                array('controller'=>'admin','action'=>'data'),
-                                array('escape'=>false,));?>
-                               
-                                    
+                                <?=
+                                $this->Html->link('Data', array('controller' => 'admin', 'action' => 'data'), array('escape' => false,));
+                                ?>
+
+
                             </li>
                         </ol>
                     </div>
@@ -265,7 +266,7 @@
                     <div class="tray tray-center p40 va-t posr">
 
                         <div class="row">
-                            
+
 
                             <div class="col-md-12">
                                 <div class="panel panel-visible" id="spy3">
@@ -287,34 +288,38 @@
                                             </thead>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Time</th>
-                                                    <th>NodeID</th>
-                                                    <th>Longtitude</th>
-                                                    <th>Latitude</th>
-                                                    <th>Data1</th>
-                                                    <th>Data2</th>
+                                                    <th>Filter By Node and date</th>
+                                                    <th><select id="node">
+                                                            <?php foreach ($Node as $node) { ?>
+                                                                <option value="<?= $node['Node']['nodeid'] ?>"><?= $node['Node']['nodename'] ?></option>
+                                                            <?php } ?>
+                                                        </select></th>
+                                                    <th>From: <input id="from" size="16" type="text"></th>
+                                                    <th>To: <input id="to" size="16" type="text"></th>
+                                                    <th></th>
+                                                    <th></th>
                                                 </tr>
                                             </tfoot>
                                             <tbody>
-                                                <?php foreach($Data as $data){ ?>
-                                                <tr>
-                                                    <td><?= $data['Data']['time'] ?></td>
-                                                    <td><?= $data['Data']['nodeid'] ?></td>
-                                                    <td><?= $data['Data']['longtitude'] ?></td>
-                                                    <td><?= $data['Data']['latitude'] ?></td>
-                                                    <td><?= $data['Data']['data1'] ?></td>
-                                                    <td><?= $data['Data']['data2'] ?></td>
-                                                </tr>
+                                                <?php foreach ($Data as $data) { ?>
+                                                    <tr>
+                                                        <td><?= $data['Data']['time'] ?></td>
+                                                        <td><?= $data['Data']['nodeid'] ?></td>
+                                                        <td><?= $data['Data']['longtitude'] ?></td>
+                                                        <td><?= $data['Data']['latitude'] ?></td>
+                                                        <td><?= $data['Data']['data1'] ?></td>
+                                                        <td><?= $data['Data']['data2'] ?></td>
+                                                    </tr>
                                                 <?php } ?>
-                                            </tbody>
+                                            </tbody>    
                                         </table>
                                     </div>
                                 </div>
                             </div>
 
-                            
+
                         </div>
-                        </div>
+                    </div>
 
                     </div>
                     <!-- end: .tray-center -->
@@ -351,7 +356,7 @@
         <!-- BEGIN: PAGE SCRIPTS -->
 
         <!-- jQuery -->
-        <?= $this->Html->script(['jquery/jquery-1.11.1.min.js', 'jquery/jquery_ui/jquery-ui.min.js', 'bootstrap.min.js', 'plugins/datatables/media/js/jquery.dataTables.js', 'plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js', 'plugins/datatables/extensions/Editor/js/dataTables.editor.js', 'plugins/datatables/media/js/dataTables.bootstrap.js', 'plugins/datatables/extensions/Editor/js/editor.bootstrap.js', 'utility/utility.js', 'main.js', 'demo.js']) ?>
+        <?= $this->Html->script(['jquery/jquery-1.11.1.min.js', 'jquery/jquery_ui/jquery-ui.min.js', 'bootstrap.min.js', 'plugins/datatables/media/js/jquery.dataTables.js', 'plugins/datatables/extensions/TableTools/js/dataTables.tableTools.min.js', 'plugins/datatables/extensions/Editor/js/dataTables.editor.js', 'plugins/datatables/media/js/dataTables.bootstrap.js', 'plugins/datatables/extensions/Editor/js/editor.bootstrap.js', 'utility/utility.js', 'main.js', 'demo.js', 'bootstrap-datepicker.js']) ?>
 
         <script type="text/javascript">
             jQuery(document).ready(function () {
@@ -364,24 +369,16 @@
                 // Init Theme Core    
                 Demo.init();
 
-                // Init tray navigation smooth scroll
-                $('.tray-nav a').smoothScroll({
-                    offset: -145
-                });
-
-                // Custom tray navigation animation
-                setTimeout(function () {
-                    $('.custom-nav-animation li').each(function (i, e) {
-                        var This = $(this);
-                        var timer = setTimeout(function () {
-                            This.addClass('animated zoomIn');
-                        }, 100 * i);
-                    });
-                }, 600);
+                var root = document.location.href;
+                if (root.lastIndexOf('/') !== (root.length - 1)) {
+                    root = root + '/';
+                }
+                
+                
+              
 
 
-
-                $('#datatable3').dataTable({
+                var table = $('#datatable3').DataTable({
                     "aoColumnDefs": [{
                             'bSortable': false,
                             'aTargets': [-1]
@@ -402,21 +399,80 @@
                         "sSwfPath": "http://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf",
                         "aButtons": [{
                                 "sExtends": "csv",
-                                "sTitle": "data", // this does the trick
-
+                                "sTitle": "Node-Data", // this does the trick
+                                "bFooter": false,
                             }, {
                                 "sExtends": "xls",
-                                "sTitle": "data", // this does the trick
-
+                                "sTitle": "Node-Data", // this does the trick
+                                "bFooter": false,
                             }, {
                                 "sExtends": "pdf",
-                                "sTitle": "data", // this does the trick
-
+                                "sTitle": "Node-Data", // this does the trick
+                                "bFooter": false,
                             }, "copy", "print"]
                     }
                 });
 
                 $('.dataTables_filter input').attr("placeholder", "Enter Terms...");
+
+
+                // Init tray navigation smooth scroll
+                $('.tray-nav a').smoothScroll({
+                    offset: -145
+                });
+                
+                function getData(){
+                    $.ajax({
+                                type: "POST",
+                                url: root + "../../data/edit/" + $('#to').val() + ".json",
+                                data: "node=" + $('#node').val() + "&from=" + $('#from').val() + "&to=" + $('#to').val(),
+                                dataType: "text",
+                                beforeSend: function () {
+                                    //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
+                                },
+                                success: function (response) {
+                                    table.rows().remove().draw();
+                                    var data = jQuery.parseJSON(response).data;
+                                    for (var i = 0; i < data.length; i++) {
+                                        //$('#datatable3 tbody').append('<tr><td>' + data[i].Data.time +'</td><td>' + data[i].Data.nodeid + '</td><td>' + data[i].Data.longtitude + '</td><td>' + data[i].Data.latitude + '</td><td>' + data[i].Data.data1 + '</td><td>' + data[i].Data.data2 + '</td><td></tr>');
+
+                                        table.row.add([data[i].Data.time,data[i].Data.nodeid, data[i].Data.longtitude, data[i].Data.latitude, data[i].Data.data1, data[i].Data.data2]).draw();
+
+                                    }
+                                    //table.row.add(["Tiger Nixon", "System Architect", "$3,120","Tiger Nixon", "System Architect", "$3,120"]).draw();
+
+
+                                }
+                            });
+                }
+
+                $('#from').datepicker({'format': 'yyyy-mm-dd'})
+                        .on('changeDate', function (ev) {
+                            getData();
+                        });
+                
+                
+
+                $('#to').datepicker({'format': 'yyyy-mm-dd'})
+                        .on('changeDate', function (ev) {
+                            getData();
+                        });
+
+                $('#node').change(function(){
+                    getData();
+                });
+
+                // Custom tray navigation animation
+                setTimeout(function () {
+                    $('.custom-nav-animation li').each(function (i, e) {
+                        var This = $(this);
+                        var timer = setTimeout(function () {
+                            This.addClass('animated zoomIn');
+                        }, 100 * i);
+                    });
+                }, 600);
+
+
 
             });
         </script>

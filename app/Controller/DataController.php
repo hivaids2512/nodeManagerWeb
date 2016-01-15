@@ -47,8 +47,16 @@ class DataController extends AppController {
             
         }
         
-        public function edit() {
-            
+        public function edit($id) {
+            $node = $this->request->data['node'];
+            $from = $this->request->data['from'];
+            $to = $this->request->data['to'];
+            $this->loadModel('Data');
+            $data = $this->Data->find('all', array('conditions' => array('Data.nodeid' => $node , 'Data.time >=' => $from , 'Data.time <=' => $to  )));
+            $this->set(array(
+            'data' => $data,
+            '_serialize' => array('data')
+        ));
         }
         
         public function delete(){

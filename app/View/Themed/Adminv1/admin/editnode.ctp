@@ -287,7 +287,7 @@
                                             <div class="col-md-8">
                                                 <div class="section">
                                                     <label class="field">
-                                                        <?= $this->Form->input('nodeid', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'value' => $node[0]['Node']['nodeid'] ,'placeholder' => 'NodeId')); ?>
+                                                        <?= $this->Form->input('nodeid', array('label' => false, 'type' => 'text', 'id' => 'from', 'class' => 'gui-input', 'value' => $node[0]['Node']['nodeid'] ,'placeholder' => 'NodeId', 'readonly' => 'readonly')); ?>
                                                         
                                                     </label>
                                                 </div>

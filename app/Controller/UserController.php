@@ -62,10 +62,13 @@ class userController extends AppController {
     }
 
     public function data() {
+        $this->loadModel('Node');
         $this->loadModel('Data');
+        $node = $this->Node->find('all');
         $data = $this->Data->find('all');
         $this->Session->setFlash($this->Auth->user('username'), 'default', array('class' => 'username'), 'username');
         $this->set('title', "Data");
+        $this->set('Node', $node );
         $this->set('Data', $data );
         $this->layout = false;
     }
